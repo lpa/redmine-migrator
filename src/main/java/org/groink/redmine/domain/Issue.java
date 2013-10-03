@@ -1,9 +1,13 @@
 package org.groink.redmine.domain;
 
 
-import java.util.Date;
+import org.joda.time.DateTime;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@XmlRootElement
 public class Issue {
 
     int id;
@@ -15,25 +19,15 @@ public class Issue {
     Category category;
     String subject;
     String description;
-    Date startDate;
-    Date dueDate;
+    DateTime startDate;
+    DateTime dueDate;
     int doneRatio;
     double estimatedHours;
 
     List<CustomField> customFields;
 
-    Date createdOn;
-    Date updatedOn;
-
-    public Issue() {
-        this.category = new Category();
-        this.author = new Author();
-        this.priority = new Priority();
-        this.status = new Status();
-        this.tracker = new Tracker();
-        this.project = new Project();
-    }
-
+    DateTime createdOn;
+    DateTime updatedOn;
 
     public int getId() {
         return id;
@@ -83,11 +77,6 @@ public class Issue {
         this.author = author;
     }
 
-    public void setAuthor(int id, String name){
-        this.author.id = id;
-        this.author.name = name;
-    }
-
     public Category getCategory() {
         return category;
     }
@@ -112,19 +101,19 @@ public class Issue {
         this.description = description;
     }
 
-    public Date getStartDate() {
+    public DateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(DateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getDueDate() {
+    public DateTime getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(DateTime dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -144,6 +133,7 @@ public class Issue {
         this.estimatedHours = estimatedHours;
     }
 
+    @XmlElement(name = "CustomField")
     public List<CustomField> getCustomFields() {
         return customFields;
     }
@@ -152,60 +142,51 @@ public class Issue {
         this.customFields = customFields;
     }
 
-    public Date getCreatedOn() {
+    public DateTime getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    public void setCreatedOn(DateTime createdOn) {
         this.createdOn = createdOn;
     }
 
-    public Date getUpdatedOn() {
+    public DateTime getUpdatedOn() {
         return updatedOn;
     }
 
-    public void setUpdatedOn(Date updatedOn) {
+    public void setUpdatedOn(DateTime updatedOn) {
         this.updatedOn = updatedOn;
     }
 
-
-    public class Project {
-        int id;
-        String name;
+    public void setProject(int id, String name) {
+        this.project.id = id;
+        this.project.name = name;
     }
 
-
-    public class Tracker {
-        int id;
-        String name;
+    public void setTracker(int id, String name) {
+        this.tracker.id = id;
+        this.tracker.name = name;
     }
 
-    public class Status {
-        int id;
-        String name;
+    public void setStatus(int id, String name) {
+        this.status.id = id;
+        this.status.name = name;
     }
 
-    public class Priority {
-        int id;
-        String name;
+    public void setPriority(int id, String name) {
+        this.priority.id = id;
+        this.priority.name = name;
     }
 
-    public class Author {
-        int id;
-        String name;
+    public void setAuthor(int id, String name) {
+        this.author.id = id;
+        this.author.name = name;
     }
 
-    public class Category {
-        int id;
-        String name;
+    public void setCategory(int id, String name) {
+        this.category.id = id;
+        this.category.name = name;
     }
-
-    public class CustomField {
-        int id;
-        String name;
-        String value;
-    }
-
 
 
 }
