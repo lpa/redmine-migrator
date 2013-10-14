@@ -20,11 +20,21 @@ public class Issue {
     String subject;
     String description;
     DateTime startDate;
+
+    @XmlElement(name = "custom_fields")
+    public CustomFieldCollection getCustomFieldCollection() {
+        return customFieldCollection;
+    }
+
+    public void setCustomFieldCollection(CustomFieldCollection customFieldCollection) {
+        this.customFieldCollection = customFieldCollection;
+    }
+
     DateTime dueDate;
     int doneRatio;
     double estimatedHours;
 
-    List<CustomField> customFields;
+    CustomFieldCollection customFieldCollection;
 
     DateTime createdOn;
     DateTime updatedOn;
@@ -131,15 +141,6 @@ public class Issue {
 
     public void setEstimatedHours(double estimatedHours) {
         this.estimatedHours = estimatedHours;
-    }
-
-    @XmlElement(name = "CustomField")
-    public List<CustomField> getCustomFields() {
-        return customFields;
-    }
-
-    public void setCustomFields(List<CustomField> customFields) {
-        this.customFields = customFields;
     }
 
     public DateTime getCreatedOn() {
