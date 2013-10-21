@@ -189,5 +189,25 @@ public class Issue {
         this.category.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id=" + id +
+                ", project=" + project +
+                ", tracker=" + tracker +
+                ", status=" + status +
+                ", priority=" + priority +
+                ", author=" + author +
+                ", category=" + category +
+                ", subject='" + subject + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", dueDate=" + dueDate +
+                ", doneRatio=" + doneRatio +
+                ", estimatedHours=" + estimatedHours +
+                ", customFieldCollection=" + customFieldCollection +
+                ", createdOn=" + createdOn +
+                ", updatedOn=" + updatedOn +
+                '}';
+    }
 }

@@ -11,6 +11,14 @@ public class Status {
     public Status() {
     }
 
+    @Override
+    public String toString() {
+        return "Status{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Status(int id, String name) {
         this.id = id;
         this.name = name;

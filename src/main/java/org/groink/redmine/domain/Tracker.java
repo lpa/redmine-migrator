@@ -8,6 +8,14 @@ public class Tracker {
     int id;
     String name;
 
+    @Override
+    public String toString() {
+        return "Tracker{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Tracker(int id, String name) {
         this.id = id;
         this.name = name;

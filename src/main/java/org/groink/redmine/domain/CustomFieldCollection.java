@@ -23,4 +23,11 @@ public class CustomFieldCollection {
     public void setCustomFieldList(List<CustomField> customFieldList) {
         this.customFieldList = customFieldList;
     }
+
+    @Override
+    public String toString() {
+        return "CustomFieldCollection{" +
+                "customFieldList=" + customFieldList +
+                '}';
+    }
 }

@@ -8,6 +8,14 @@ public class Project {
     int id;
     String name;
 
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Project(int id, String name) {
         this.id = id;
         this.name = name;
