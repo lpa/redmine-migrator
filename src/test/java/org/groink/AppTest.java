@@ -3,26 +3,25 @@ package org.groink;
 import org.groink.redmine.domain.*;
 import org.joda.time.DateTime;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-import javax.ws.rs.client.*;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-
+import javax.xml.bind.Unmarshaller;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
 public class AppTest
 {
 
-    private static String APIKEY = "ada0245726a7ecc45c074b785e4614808d17b202";
+    private final static String APIKEY = "ada0245726a7ecc45c074b785e4614808d17b202";
 
 
     @Test
@@ -35,7 +34,7 @@ public class AppTest
     public void marshallingIssueShouldBeRight() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Issue.class);
         Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, new Boolean(true));
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
         Issue issue = createIssue();
         marshaller.marshal(issue, System.out);
@@ -71,25 +70,28 @@ public class AppTest
     @Test
     public void getAnIssue(){
 
-        /* Client client = ClientBuilder.newClient();
-        WebTarget target = client.target("http://redmine.adencf.local/");
-        WebTarget issueTarget = target.path("issues/3653.xml");
-        issueTarget.queryParam("key",apiKey);
-
-        Invocation.Builder invocationBuilder = issueTarget.request(MediaType.APPLICATION_XML_TYPE);
-        Response response = invocationBuilder.get();
-
-        System.out.println(response.getStatus());
-        System.out.println(response.readEntity(String.class)); */
-
-
         String responseEntity = ClientBuilder.newClient()
                 .target("http://redmine.adencf.local/").path("issues/3653.xml")
                 .queryParam("key",APIKEY)
                 .request(MediaType.APPLICATION_XML_TYPE).get(String.class);
 
-        System.out.println(responseEntity);
+        assertTrue(responseEntity != null);
+        assertTrue(responseEntity.contains("<id>3653</id>"));
 
+    }
+
+    @Test
+    public void getIssuesAboutCV(){
+
+        String responseEntity = ClientBuilder.newClient()
+                .target("http://redmine.adencf.local/").path("issues.xml")
+                .queryParam("key",APIKEY)
+                .queryParam("project_id","21")
+                .queryParam("category_id","479")
+                .request(MediaType.APPLICATION_XML_TYPE).get(String.class);
+
+        assertTrue(responseEntity != null);
+        assertTrue(responseEntity.contains("CV Search"));
     }
 
 
@@ -107,4 +109,47 @@ public class AppTest
 
     }
 
+    @Test
+    public void fetchResponseEntity_shouldReturnLessOrEqualMaxNumberOfIssues() throws JAXBException {
+
+         // Given
+         String responseEntity = App.fetchResponseEntity(1);
+         JAXBContext jaxbContext = JAXBContext.newInstance(Issues.class);
+         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+         // When
+         StringReader reader = new StringReader(responseEntity);
+         Issues issues = (Issues) unmarshaller.unmarshal(reader);
+         int count = issues.getIssues().size();
+
+         // Then
+         assertTrue(count <= App.MAX_ITEM_NUMBER);
+    }
+
+
+
+        @Test
+        public void fetchResponseEntity_shouldReturnLessOrEqualMaxNumberOfIssuesEvenWithTooBigPageNumber() throws JAXBException {
+
+        // Given
+        String responseEntity = App.fetchResponseEntity(100);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Issues.class);
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        //When
+        StringReader reader = new StringReader(responseEntity);
+        Issues issues = (Issues) unmarshaller.unmarshal(reader);
+        int count = 0;
+
+        for (Issue i : issues.getIssues()) {
+            count++;
+        }
+
+        // Then
+        assertTrue(count <= App.MAX_ITEM_NUMBER);
+
+    }
 }
+
+
+

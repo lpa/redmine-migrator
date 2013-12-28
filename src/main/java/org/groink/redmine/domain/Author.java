@@ -1,12 +1,15 @@
 package org.groink.redmine.domain;
 
+import com.google.common.base.Objects;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
 /** org.groink.redmine.domain.Issue$Category is a non-static inner class, and JAXB can't handle those.
  *  so make them top level classes*/
 public class Author {
-    int id;
-    String name;
+
+    private int id;
+    private String name;
 
     public Author() {
     }
@@ -36,9 +39,26 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id, name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Author other = (Author) obj;
+        return Objects.equal(this.id, other.id) && Objects.equal(this.name, other.name);
     }
 }

@@ -19,4 +19,8 @@ public class Issues {
                 "issues=" + issues +
                 '}';
     }
+
+    public List<Issue> getIssues() {
+        return issues;
+    }
 }

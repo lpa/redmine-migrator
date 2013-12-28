@@ -1,13 +1,15 @@
 package org.groink.redmine.domain;
 
+import com.google.common.base.Objects;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
 public class CustomField {
 
-    int id;
-    String name;
-    String value;
+    private int id;
+    private String name;
+    private String value;
 
     public CustomField() {
     }
@@ -47,11 +49,28 @@ public class CustomField {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hashCode(id, name, value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final CustomField other = (CustomField) obj;
+        return Objects.equal(this.id, other.id) && Objects.equal(this.name, other.name) && Objects.equal(this.value, other.value);
+    }
+
+    @Override
     public String toString() {
-        return "CustomField{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("value", value)
+                .toString();
     }
 }

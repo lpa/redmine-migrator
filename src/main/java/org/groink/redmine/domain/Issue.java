@@ -1,25 +1,25 @@
 package org.groink.redmine.domain;
 
 
+import com.google.common.base.Objects;
 import org.joda.time.DateTime;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 @XmlRootElement
 public class Issue {
 
-    int id;
-    Project project;
-    Tracker tracker;
-    Status status;
-    Priority priority;
-    Author author;
-    Category category;
-    String subject;
-    String description;
-    DateTime startDate;
+    private int id;
+    private Project project;
+    private Tracker tracker;
+    private Status status;
+    private Priority priority;
+    private Author author;
+    private Category category;
+    private String subject;
+    private String description;
+    private DateTime startDate;
 
     @XmlElement(name = "custom_fields")
     public CustomFieldCollection getCustomFieldCollection() {
@@ -160,54 +160,71 @@ public class Issue {
     }
 
     public void setProject(int id, String name) {
-        this.project.id = id;
-        this.project.name = name;
+        this.project.setId(id);
+        this.project.setName(name);
     }
 
     public void setTracker(int id, String name) {
-        this.tracker.id = id;
-        this.tracker.name = name;
+        this.tracker.setId(id);
+        this.tracker.setName(name);
     }
 
     public void setStatus(int id, String name) {
-        this.status.id = id;
-        this.status.name = name;
+        this.status.setId(id);
+        this.status.setName(name);
     }
 
     public void setPriority(int id, String name) {
-        this.priority.id = id;
-        this.priority.name = name;
+        this.priority.setId(id);
+        this.priority.setName(name);
     }
 
     public void setAuthor(int id, String name) {
-        this.author.id = id;
-        this.author.name = name;
+        this.author.setId(id);
+        this.author.setName(name);
     }
 
     public void setCategory(int id, String name) {
-        this.category.id = id;
-        this.category.name = name;
+        this.category.setId(id);
+        this.category.setName(name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id, project, tracker, status, priority, author, category, subject, description, startDate, dueDate, doneRatio, estimatedHours, customFieldCollection, createdOn, updatedOn);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Issue other = (Issue) obj;
+        return Objects.equal(this.id, other.id) && Objects.equal(this.project, other.project) && Objects.equal(this.tracker, other.tracker) && Objects.equal(this.status, other.status) && Objects.equal(this.priority, other.priority) && Objects.equal(this.author, other.author) && Objects.equal(this.category, other.category) && Objects.equal(this.subject, other.subject) && Objects.equal(this.description, other.description) && Objects.equal(this.startDate, other.startDate) && Objects.equal(this.dueDate, other.dueDate) && Objects.equal(this.doneRatio, other.doneRatio) && Objects.equal(this.estimatedHours, other.estimatedHours) && Objects.equal(this.customFieldCollection, other.customFieldCollection) && Objects.equal(this.createdOn, other.createdOn) && Objects.equal(this.updatedOn, other.updatedOn);
     }
 
     @Override
     public String toString() {
-        return "Issue{" +
-                "id=" + id +
-                ", project=" + project +
-                ", tracker=" + tracker +
-                ", status=" + status +
-                ", priority=" + priority +
-                ", author=" + author +
-                ", category=" + category +
-                ", subject='" + subject + '\'' +
-                ", description='" + description + '\'' +
-                ", startDate=" + startDate +
-                ", dueDate=" + dueDate +
-                ", doneRatio=" + doneRatio +
-                ", estimatedHours=" + estimatedHours +
-                ", customFieldCollection=" + customFieldCollection +
-                ", createdOn=" + createdOn +
-                ", updatedOn=" + updatedOn +
-                '}';
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("project", project)
+                .add("tracker", tracker)
+                .add("status", status)
+                .add("priority", priority)
+                .add("author", author)
+                .add("category", category)
+                .add("subject", subject)
+                .add("description", description)
+                .add("startDate", startDate)
+                .add("dueDate", dueDate)
+                .add("doneRatio", doneRatio)
+                .add("estimatedHours", estimatedHours)
+                .add("customFieldCollection", customFieldCollection)
+                .add("createdOn", createdOn)
+                .add("updatedOn", updatedOn)
+                .toString();
     }
 }
