@@ -1,0 +1,31 @@
+{"project": {
+    "id": 181,
+    "name": "Recherche de CV",
+    "identifier": "ws-search-cv-add",
+    "description": "Services web de recherche de CV du référentiel Adendesk",
+    "homepage": "http://services.figaroclassifieds.com/documentation/resumes/",
+    "parent": {
+        "id": 184,
+        "name": "Adendesk global"
+    },
+    "created_on": "2013-09-30T08:10:33Z",
+    "updated_on": "2013-09-30T08:10:33Z",
+    "trackers": [
+        {
+            "id": 1,
+            "name": "Anomalie"
+        },
+        {
+            "id": 2,
+            "name": "Evolution"
+        },
+        {
+            "id": 3,
+            "name": "Assistance"
+        },
+        {
+            "id": 4,
+            "name": "Story"
+        }
+    ]
+}}

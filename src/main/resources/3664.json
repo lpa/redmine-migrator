@@ -1,0 +1,52 @@
+{"issue": {
+    "id": 3664,
+    "project": {
+        "id": 21,
+        "name": "Offres / Nomenclatures"
+    },
+    "tracker": {
+        "id": 1,
+        "name": "Anomalie"
+    },
+    "status": {
+        "id": 1,
+        "name": "Nouveau"
+    },
+    "priority": {
+        "id": 3,
+        "name": "Bas"
+    },
+    "author": {
+        "id": 89,
+        "name": "Olivier Miel"
+    },
+    "assigned_to": {
+        "id": 89,
+        "name": "Olivier Miel"
+    },
+    "category": {
+        "id": 479,
+        "name": "CV Search"
+    },
+    "fixed_version": {
+        "id": 103,
+        "name": "Legacy"
+    },
+    "subject": "Atom - Terms & Schemes pour les catégories",
+    "description": "Atom - Terms & Schemes pour les catégories",
+    "done_ratio": 0,
+    "custom_fields": [
+        {
+            "id": 18,
+            "name": "Complexité",
+            "value": ""
+        },
+        {
+            "id": 19,
+            "name": "Valeur métier",
+            "value": ""
+        }
+    ],
+    "created_on": "2009-11-13T13:52:06Z",
+    "updated_on": "2014-01-26T14:13:40Z"
+}}
