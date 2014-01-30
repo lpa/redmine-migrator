@@ -1,0 +1,19 @@
+
+Delete version (field "fixed_version") on an issue :
+
+curl -i -XPUT -H 'Content-Type: application/json' -d '{"issue":{"fixed_version_id":null}}' "http://redmine.adencf.local/issues/3664.json?key=ada0245726a7ecc45c074b785e4614808d17b202"
+
+HTTP/1.1 200 OK
+Date: Thu, 30 Jan 2014 21:13:55 GMT
+Server: Apache
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.13
+X-UA-Compatible: IE=Edge,chrome=1
+Cache-Control: no-cache
+X-Request-Id: 293c033354378f8c2b77ba97d518b18c
+X-Runtime: 0.362313
+X-Rack-Cache: invalidate, pass
+Set-Cookie: _redmine_session=BAh7B0kiCmZsYXNoBjoGRUZvOiVBY3Rpb25EaXNwYXRjaDo6Rmxhc2g6OkZsYXNoSGFzaAk6CkB1c2VkbzoIU2V0BjoKQGhhc2h7ADoMQGNsb3NlZEY6DUBmbGFzaGVzewY6C25vdGljZUkiKk1pc2Ugw6Agam91ciBlZmZlY3R1w6llIGF2ZWMgc3VjY8Oocy4GOwBUOglAbm93MEkiD3Nlc3Npb25faWQGOwBGSSIlZmZkZWFjN2U4OTIxOWQ3ZWFhOWQwMmFiOTdiN2ZiNWUGOwBU--ba3a5ee09c99c09bebe3956386a852fd2910fbb3; path=/; HttpOnly
+Set-Cookie: autologin=; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT
+Status: 200
+Content-Length: 0
+Content-Type: application/json; charset=utf-8

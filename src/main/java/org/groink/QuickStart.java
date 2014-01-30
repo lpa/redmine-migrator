@@ -5,7 +5,6 @@ import com.taskadapter.redmineapi.RedmineException;
 import com.taskadapter.redmineapi.RedmineManager;
 import com.taskadapter.redmineapi.bean.Issue;
 import com.taskadapter.redmineapi.bean.Project;
-import com.taskadapter.redmineapi.internal.RedmineJSONBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +24,7 @@ public class QuickStart {
         RedmineManager mgr = new RedmineManager(redmineHost, apiAccessKey);
         try {
             //tryGetIssues(mgr);
-            tryMigrateSingleIssue(3664, mgr);
+            tryMigrateSingleIssue(3662, mgr);
 
 
         } catch (Exception e) {
@@ -37,14 +36,13 @@ public class QuickStart {
     private static void tryMigrateSingleIssue(int issueId, RedmineManager mgr) {
         try {
             Issue toMigrate = mgr.getIssueById(issueId);
+
             Project p = mgr.getProjectByKey(destinationProjectKey);
             toMigrate.getProject().setId(p.getId());
-            //toMigrate.getProject().setDescription(p.getDescription());
-            //logger.debug(toMigrate.getProject().toString());
-
-            //toMigrate.setNotes("test update api");
             toMigrate.setProject(p);
-            //mgr.update(toMigrate);
+            toMigrate.setTargetVersion(null);
+
+            mgr.update(toMigrate);
 
         } catch (RedmineException e) {
             logger.error(e.getMessage(),e);
